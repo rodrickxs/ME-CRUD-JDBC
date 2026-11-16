@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS clientes (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(120) NOT NULL,
+    sexo VARCHAR(30) NOT NULL,
+    email VARCHAR(254) NOT NULL UNIQUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS reservas (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cliente_id BIGINT NOT NULL,
+    data_chegada DATE NOT NULL,
+    numero_noites INT NOT NULL,
+    numero_hospedes INT NOT NULL,
+    mensagem VARCHAR(1000),
+    CONSTRAINT fk_reservas_cliente FOREIGN KEY (cliente_id)
+        REFERENCES clientes (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
